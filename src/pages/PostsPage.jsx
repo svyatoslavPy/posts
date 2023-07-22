@@ -1,14 +1,33 @@
-import { Header } from '../components/Header'
-import { MainLayout } from '../layouts/MainLayout'
-import { Posts } from '../components/Posts'
+import { useEffect, useState } from 'react'
+import { PostItem } from '../components/PostsItem'
 
 export const PostsPage = () => {
+	const [posts, setPosts] = useState([])
+
+	useEffect(() => {
+		const getPosts = async () => {
+			try {
+				const resp = await fetch('https://jsonplaceholder.typicode.com/posts')
+				const data = await resp.json()
+				setPosts(data)
+			} catch (e) {
+				console.log(e)
+			}
+		}
+		getPosts()
+	}, [])
+
 	return (
 		<>
-			<Header />
-			<MainLayout>
-				<Posts />
-			</MainLayout>
+			<h1>Posts</h1>
+			<section className='posts'>
+				{posts.length > 0 &&
+					posts
+						.slice(0, 9)
+						.map(post => (
+							<PostItem key={post.id} title={post.title} id={post.id} />
+						))}
+			</section>
 		</>
 	)
 }
