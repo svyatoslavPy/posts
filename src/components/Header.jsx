@@ -1,4 +1,4 @@
-import { HeaderLayout } from './HeaderLayout'
+import { HeaderLayout } from '../layouts/HeaderLayout'
 import { HeaderNav } from './HeaderNav'
 
 export const Header = () => {
@@ -8,3 +8,6 @@ export const Header = () => {
 		</HeaderLayout>
 	)
 }
+
+
+
